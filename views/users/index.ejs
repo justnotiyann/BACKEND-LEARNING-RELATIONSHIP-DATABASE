@@ -1,0 +1,90 @@
+<%- include('../partials/header') %>
+<style>
+  #create_account {
+    margin-top: 5em;
+  }
+</style>
+
+<section id="create_account">
+  <div class="container">
+    <div class="row">
+      <div class="col-5">
+        <div class="card">
+          <div class="card-header text-center">
+            <h1 class="fw-bold">Create Account</h1>
+          </div>
+          <div class="card-body">
+            <% if (locals.fail) { %>
+            <div class="alert alert-danger" role="alert">
+              <strong><%=fail.fail%></strong>
+            </div>
+            <% } %> <% if (locals.success) { %>
+            <div class="alert alert-success" role="alert">
+              <strong><%=success.success%></strong>
+            </div>
+            <% } %>
+
+            <form action="/" method="POST">
+              <div class="form-group mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group mb-3">
+                <label for="username" class="form-label">username</label>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea
+                  name="address"
+                  id="address"
+                  cols="30"
+                  rows="10"
+                  class="form-control"
+                ></textarea>
+              </div>
+              <div class="col mb-3">
+                <select
+                  class="form-select"
+                  name="jurusanId"
+                  aria-label="Default select example"
+                >
+                  <option selected>Jurusan</option>
+                  <option value="1">Akuntasi</option>
+                  <option value="2">Teknik Informatika</option>
+                  <option value="3">Sistem Informasi</option>
+                </select>
+              </div>
+              <div class="col">
+                <button class="btn btn-primary fw-bold w-100">
+                  Create Account
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-7"></div>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

@@ -1,13 +1,14 @@
-const { DataTypes, Deferrable } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const db = require("../config/db");
 
 const Users = db.define(
   "user",
   {
-    user_id: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
@@ -19,9 +20,6 @@ const Users = db.define(
       type: DataTypes.STRING,
     },
     address: {
-      type: DataTypes.STRING,
-    },
-    jurusan: {
       type: DataTypes.STRING,
     },
   },

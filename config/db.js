@@ -5,7 +5,7 @@ require("dotenv").config();
 //   host: process.env.HOST,
 //   dialect: process.env.DIALECT,
 // });
-const db = new Sequelize("BELAJAR-RELASI", "root", "", {
+const db = new Sequelize("TESTING-CLOUD", "root", "", {
   host: "localhost",
   dialect: "mysql",
 });

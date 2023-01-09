@@ -1,8 +1,16 @@
-const { Users } = require("../models");
+const { Users, Jurusan, Invoices } = require("../../models");
 const bcryptjs = require("bcryptjs");
 
 exports.index = async (req, res, next) => {
-  const result = await Users.findAll({});
+  const result = await Users.findAll({
+    attributes: ["email", "username", "address"],
+    include: [
+      {
+        model: Jurusan,
+        attributes: ["jurusan"],
+      },
+    ],
+  });
 
   if (result <= 0) {
     res.json({ msg: "no data" });
@@ -14,14 +22,13 @@ exports.index = async (req, res, next) => {
 };
 
 exports.create = async (req, res, next) => {
-  const { email, username, password, address, jurusan } = req.body;
+  const { email, username, password, address } = req.body;
   const hashPass = await bcryptjs.hash(password, 12);
   const result = await Users.create({
     email,
     username,
     password: hashPass,
     address,
-    jurusan,
   });
   if (!result) {
     res.status(500).json({ msg: "Internal server error" });
@@ -45,7 +52,7 @@ exports.show = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
   const id = req.params.id;
-  const { email, username, password, address, jurusan } = req.body;
+  const { email, username, password, address } = req.body;
 
   if (!id) {
     res.status(400).json({
@@ -60,9 +67,8 @@ exports.update = async (req, res, next) => {
       username,
       password: hashPass,
       address,
-      jurusan,
     },
-    { where: { user_id: id } }
+    { where: { id } }
   );
 
   if (!result) {
