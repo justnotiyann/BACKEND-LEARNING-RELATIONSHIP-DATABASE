@@ -19,6 +19,9 @@ movies.belongsTo(media, { foreignKey: "media_id" });
 star_billing.hasOne(movies, { foreignKey: "star_billing_id" });
 movies.belongsTo(star_billing, { foreignKey: "star_billing_id" });
 
+actors.hasOne(movies, { foreignKey: "actors_id" });
+movies.belongsTo(actors, { foreignKey: "actors_id" });
+
 db.sync()
   .then(() => console.log("all table oracle succefuly created"))
   .catch((e) => console.log("failed create table", e));

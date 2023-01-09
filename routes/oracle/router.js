@@ -5,6 +5,7 @@ const {
   media,
   movies,
   star_billing,
+  actors,
 } = require("../../models/oracle/index");
 
 router.get("/", (req, res, next) => {
@@ -126,6 +127,10 @@ router.get("/movies", async (req, res, next) => {
           model: star_billing,
           attributes: ["komentar"],
         },
+        {
+          model: actors,
+          attributes: ["nama_panggung", "nama_depan"],
+        },
       ],
       attributes: ["judul", "deskripsi"],
     });
@@ -173,6 +178,36 @@ router.get("/star-billing", async (req, res, next) => {
 router.post("/star-billing", async (req, res, next) => {
   try {
     const result = await star_billing.create(req.body);
+
+    if (!result) {
+      res.sendStatus(500);
+    }
+
+    res.status(200).json({ data: result });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+// =================================
+// actors
+// =================================
+router.get("/actors", async (req, res, next) => {
+  try {
+    const result = await actors.findAll();
+
+    if (!result) {
+      res.sendStatus(500);
+    }
+
+    res.status(200).json({ data: result });
+  } catch (e) {
+    console.log(e);
+  }
+});
+router.post("/actors", async (req, res, next) => {
+  try {
+    const result = await actors.create(req.body);
 
     if (!result) {
       res.sendStatus(500);
