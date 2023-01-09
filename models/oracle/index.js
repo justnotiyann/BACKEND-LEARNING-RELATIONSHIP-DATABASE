@@ -10,20 +10,24 @@ const star_billing = require("./star_billing");
 customers.hasMany(rental_history, { foreignKey: "customer_id" });
 rental_history.belongsTo(customers, { foreignKey: "customer_id" });
 
-// movies.hasMany(media, { foreignKey: "movie_id" });
-// movies.hasMany(star_billing, { foreignKey: "movie_id" });
+rental_history.hasOne(media);
+media.belongsTo(rental_history);
 
-// star_billing.belongsTo(movies, { foreignKey: "star_billing_id" });
-// media.belongsTo(movies, { foreignKey: "star_billing_id" });
+media.hasOne(movies, { foreignKey: "media_id" });
+movies.belongsTo(media, { foreignKey: "media_id" });
 
-// actors.hasMany(star_billing, { foreignKey: "actors_id" });
-// star_billing.belongsTo(actors, { foreignKey: "actors_id" });
+star_billing.hasOne(movies, { foreignKey: "star_billing_id" });
+movies.belongsTo(star_billing, { foreignKey: "star_billing_id" });
 
-// media.hasMany(rental_history, { foreignKey: "media_id" });
-// rental_history.belongsTo(media, { foreignKey: "media_id" });
-
-db.sync({ alter: true })
+db.sync()
   .then(() => console.log("all table oracle succefuly created"))
   .catch((e) => console.log("failed create table", e));
 
-module.exports = { customers, rental_history };
+module.exports = {
+  customers,
+  actors,
+  movies,
+  star_billing,
+  rental_history,
+  media,
+};
