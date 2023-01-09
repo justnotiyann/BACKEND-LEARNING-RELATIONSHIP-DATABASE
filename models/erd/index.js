@@ -13,7 +13,7 @@ sale.belongsTo(products, { foreignKey: "product_id" });
 suppliers.hasMany(products, { foreignKey: "supplier_id" });
 products.belongsTo(suppliers, { foreignKey: "supplier_id" });
 
-db.sync({ alter: true })
+db.sync()
   .then(() => console.log("all table succefuly created"))
   .catch((e) => console.log("failed create table", e));
 

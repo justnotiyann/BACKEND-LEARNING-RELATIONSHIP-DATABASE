@@ -11,7 +11,7 @@ Settings.belongsTo(Employee);
 Jurusan.hasOne(Users);
 Users.belongsTo(Jurusan);
 
-db.sync({ alter: true })
+db.sync()
   .then(() => console.log("all table succefuly created"))
   .catch((e) => console.log("failed create table", e));
 
