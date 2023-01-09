@@ -54,6 +54,7 @@ const jurusanRouter = require("./routes/jurusan/router");
 const invoicesRouter = require("./routes/invoices/router");
 const employeeRouter = require("./routes/employee/router");
 const settingRouter = require("./routes/settings/router");
+const oracleRouter = require("./routes/oracle/router");
 
 app.use("/", indexRoutes);
 app.use("/users", userRouter);
@@ -61,6 +62,7 @@ app.use("/jurusan", jurusanRouter);
 app.use("/invoices", invoicesRouter);
 app.use("/employee", employeeRouter);
 app.use("/settings", settingRouter);
+app.use("/oracle", oracleRouter);
 
 app.listen(3000, () => console.log("server up and running"));
 module.exports = app;
